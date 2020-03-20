@@ -1,0 +1,63 @@
+# Number of repeatable tech levels
+@tech_the_evolving_state_levels = 3
+
+# Slightly decreased the weight for this tech - it's supposed to be rare!
+@tech_the_evolving_state_weight = 20
+
+#The Evolving State
+tech_the_evolving_state = {
+	cost = @repeatableTechBaseCost
+	cost_per_level = @repeatableTechLevelCost
+	area = society
+	category = { statecraft }
+	tier = @repeatableTechTier
+	levels = @tech_the_evolving_state_levels
+	is_rare = yes
+	prerequisites = { "tech_galactic_administration" }
+	weight = @tech_the_evolving_state_weight
+	
+	modifier = {
+		country_government_civic_points_add = 1
+	}
+	
+	potential = {
+		OR = {
+			NOT = { has_authority = auth_machine_intelligence }
+			has_civic = civic_machine_assimilator
+			has_civic = civic_machine_servitor
+		}
+	}
+	
+	weight_modifier = {
+		factor = 4
+		modifier = {
+			factor = 1.25
+			research_leader = {
+				area = society
+				has_trait = "leader_trait_expertise_statecraft"
+			}
+		}
+		modifier = {
+			factor = @repatableTechFactor
+		}		
+	}	
+	
+	weight_groups = {
+		repeatable
+	}
+	
+	mod_weight_if_group_picked = {
+		repeatable = 0.01
+	}
+
+	ai_weight = {
+		factor = 10
+		modifier = {
+			factor = 1.25
+			research_leader = {
+				area = society
+				has_trait = "leader_trait_expertise_statecraft"
+			}
+		}
+	}
+}

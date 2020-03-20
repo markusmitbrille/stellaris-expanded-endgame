@@ -1,0 +1,97 @@
+# Number of repeatable tech levels
+@tech_hyper_templating_levels = 8
+
+# Slightly decreased the weight for this tech - it's supposed to be rare!
+@tech_hyper_templating_weight = 20
+
+#Hyper Templating
+tech_hyper_templating = {
+	cost = @repeatableTechBaseCost
+	cost_per_level = @repeatableTechLevelCost
+	area = engineering
+	category = { industry }
+	tier = @repeatableTechTier
+	levels = @tech_hyper_templating_levels
+	is_rare = yes
+	prerequisites = { "tech_robomodding_points_2" }
+	weight = @tech_hyper_templating_weight
+	
+	modifier = {
+		ROBOT_species_trait_points_add = 1
+	}
+	
+	potential = {
+		NOT = { has_ethic = "ethic_gestalt_consciousness" }
+	}
+	
+	weight_modifier = {
+		modifier = {
+			factor = @repatableTechFactor
+		}		
+		modifier = {
+			factor = 0
+			has_policy_flag = robots_outlawed
+		}
+		modifier = {
+			factor = 2
+			has_valid_civic = civic_mechanists
+		}
+		modifier = {
+			factor = 4
+			has_ascension_perk = ap_the_flesh_is_weak
+		}
+		modifier = {
+			factor = 0.20
+			NOR = {
+				research_leader = {
+					area = engineering
+					has_trait = "leader_trait_maniacal"
+				}
+				research_leader = {
+					area = engineering
+					has_trait = "leader_trait_spark_of_genius"
+				}
+				research_leader = {
+					area = engineering
+					has_trait = "leader_trait_curator"
+				}
+				research_leader = {
+					area = engineering
+					has_trait = "leader_trait_expertise_industry"
+				}
+			}
+		}
+	}	
+	
+	weight_groups = {
+		repeatable
+	}
+	
+	mod_weight_if_group_picked = {
+		repeatable = 0.01
+	}
+
+	ai_weight = {
+		factor = 3 #rare tech
+		modifier = {
+			factor = 0
+			NOT = { has_ai_personality_behaviour = robot_exploiter }
+			NOT = { has_ai_personality_behaviour = robot_liberator }
+		}
+		modifier = {
+			factor = 2
+			has_valid_civic = civic_mechanists
+		}
+		modifier = {
+			factor = 2
+			has_ascension_perk = ap_the_flesh_is_weak
+		}
+		modifier = {
+			factor = 1.25
+			research_leader = {
+				area = engineering
+				has_trait = "leader_trait_expertise_industry"
+			}
+		}
+	}
+}

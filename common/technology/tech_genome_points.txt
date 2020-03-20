@@ -1,0 +1,83 @@
+# Number of repeatable tech levels
+@tech_genome_mastery_levels = 8
+
+# Slightly decreased the weight for this tech - it's supposed to be rare!
+@tech_genome_mastery_weight = 20
+
+#Genome Mastery
+tech_genome_mastery = {
+	cost = @repeatableTechBaseCost
+	cost_per_level = @repeatableTechLevelCost
+	area = society
+	category = { biology }
+	tier = @repeatableTechTier
+	levels = @tech_genome_mastery_levels
+	is_rare = yes
+	prerequisites = { "tech_gene_expressions" }
+	weight = @tech_genome_mastery_weight
+	
+	modifier = {
+		description = tech_gene_expressions_modifier_desc
+		description_parameters = {
+			POINTS = 1
+		}
+		BIOLOGICAL_species_trait_points_add = 1
+	}
+	
+	potential = {
+		OR = {
+			NOT = { has_authority = auth_machine_intelligence }
+			has_civic = civic_machine_assimilator
+			has_civic = civic_machine_servitor
+		}
+	}
+	
+	weight_modifier = {
+		modifier = {
+			factor = @repatableTechFactor
+		}		
+		modifier = {
+			factor = 1.25
+			has_authority = auth_hive_mind
+		}		
+		modifier = {
+			factor = 0.50
+			NOR = {
+				research_leader = {
+					area = society
+					has_trait = "leader_trait_expertise_biology"
+				}
+				research_leader = {
+					area = society
+					has_trait = "leader_trait_curator"
+				}
+			}
+		}
+		modifier = {
+			factor = 1.50
+			research_leader = {
+				area = society
+				has_trait = "leader_trait_spark_of_genius"
+			}
+		}
+	}	
+	
+	weight_groups = {
+		repeatable
+	}
+	
+	mod_weight_if_group_picked = {
+		repeatable = 0.01
+	}
+
+	ai_weight = {
+		factor = 3 #rare tech
+		modifier = {
+			factor = 1.25
+			research_leader = {
+				area = society
+				has_trait = "leader_trait_expertise_biology"
+			}
+		}
+	}
+}
