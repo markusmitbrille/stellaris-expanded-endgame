@@ -34,14 +34,26 @@ tech_hyper_templating = {
 		}
 		modifier = {
 			factor = 2
-			has_valid_civic = civic_mechanists
+			has_origin = origin_mechanists
 		}
 		modifier = {
 			factor = 4
 			has_ascension_perk = ap_the_flesh_is_weak
 		}
 		modifier = {
-			factor = 0.20
+			factor = @ap_technological_ascendancy_rare_tech
+			has_ascension_perk = ap_technological_ascendancy
+		}
+		modifier = {
+			factor = @federation_perk_factor
+			has_federation = yes
+			federation = {
+				has_federation_perk = rare_tech_boost
+				any_member = { has_technology = tech_robomodding_points_2 }
+			}
+		}
+		modifier = {
+			factor = 0.50
 			NOR = {
 				research_leader = {
 					area = engineering

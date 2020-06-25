@@ -31,15 +31,15 @@ tech_the_evolving_state = {
 	weight_modifier = {
 		factor = 4
 		modifier = {
+			factor = @repatableTechFactor
+		}		
+		modifier = {
 			factor = 1.25
 			research_leader = {
 				area = society
 				has_trait = "leader_trait_expertise_statecraft"
 			}
 		}
-		modifier = {
-			factor = @repatableTechFactor
-		}		
 	}	
 	
 	weight_groups = {
